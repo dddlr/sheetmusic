@@ -15,7 +15,7 @@ class Style(db.Model):
     description = db.Column(db.String(200))
 
     def __repr__(self):
-        return '<Style {}>'.format(style)
+        return '<Style {}>'.format(self.style)
 
 class OriginalAuthor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +24,7 @@ class OriginalAuthor(db.Model):
     age = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<OriginalAuthor {} ({})>'.format(name, id)
+        return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
 
 class Music(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,10 +32,21 @@ class Music(db.Model):
     year = db.Column(db.Integer)
     url = db.Column(db.String(32))
 
-    style_id = db.Column(db.Integer, db.ForeignKey('Style.style'))
-    original_author_id = db.Column(db.Integer, db.ForeignKey('OriginalAuthor.id'))
+    style_id = db.Column(db.String(32), db.ForeignKey('style.style'))
+    original_author_id = db.Column(db.Integer, db.ForeignKey('original_author.id'))
+
+    # this is not actually a database field, but a high-level feature that
+    # enables access to instruments from the Music table
+    # TODO: see if this actually works
+    instruments = db.relationship('MusicInstrument', backref='instrument', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Music {} ({})>'.format(self.name, self.id)
 
 class MusicInstrument(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    music_id = db.Column(db.Integer, db.ForeignKey('Music.id'))
-    instrument_id = db.Column(db.Integer, db.ForeignKey('Instrument.id'))
+    music_id = db.Column(db.Integer, db.ForeignKey('music.id'))
+    instrument_id = db.Column(db.Integer, db.ForeignKey('instrument.id'))
+
+    def __repr__(self):
+        return '<MusicInstrument {} ({})>'.format(self.music_id, self.instrument_id)
