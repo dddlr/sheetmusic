@@ -2,6 +2,7 @@ from flask import render_template
 from flask_login import current_user, login_user
 from app.models import Instrument, Music, MusicInstrument, OriginalAuthor, Style
 
+def 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Login page."""
