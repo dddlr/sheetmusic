@@ -1,5 +1,2 @@
-from app import app
+from app import ui
 
-@app.route('/')
-def index():
-    return 'rudimentary test message'

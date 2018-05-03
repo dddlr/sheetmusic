@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block "content" %}
+<p>Welcome. Select what thing to add, change, or delete:</p>
+<ul>
+  <li><a href="{{ url_for('composer') }}">Composers
+  <li><a href="{{ url_for('instrument') }}">Instruments</li>
+  <li><a href="{{ url_for('music') }}">Music</li>
+  <li><a href="{{ url_for('style') }}">Styles</a></li>
+</ul>
+{% endblock %}

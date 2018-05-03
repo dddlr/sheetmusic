@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+Search.
+<form method="get" action="">
+  <input type="search" name="q" placeholder="Search for sheet music">
+  <button>search!</button>
+</form>
+{% if music %}
+Results:
+  {% if music.count() > 0 %}{% include "music.html" %}
+  {% else %}No results :(
+  {% endif %}
+{% endif %}
