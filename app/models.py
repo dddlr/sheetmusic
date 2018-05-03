@@ -21,7 +21,7 @@ class OriginalAuthor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     country = db.Column(db.String(20))
-    age = db.Column(db.Integer)
+    dob = db.Column(db.Integer)
 
     def __repr__(self):
         return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
@@ -30,7 +30,7 @@ class Music(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
     year = db.Column(db.Integer)
-    url = db.Column(db.String(32))
+    url = db.Column(db.String(32), nullable=False)
 
     style_id = db.Column(db.String(32), db.ForeignKey('style.style'))
     original_author_id = db.Column(db.Integer, db.ForeignKey('original_author.id'))
