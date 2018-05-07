@@ -8,9 +8,8 @@
     <header>
     <h2>Sheety music</h2>
     {% if title %}<h1>{{ title }}</h1>{% endif %}
-    <a href="/login/">Log in</a>
     </header>
     <hr>
-    {{ content }}
+    {% block content %}{% endblock %}
   </body>
 </html>

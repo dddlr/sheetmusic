@@ -1,3 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
 {% for piece in music %}
-{{ piece.name }}<br>
+<div>
+  <h3>{{ piece.name }}</h3>
+  <p>{{ piece.year }}</p>
+  <p><a href="{{ url_for('sheet_with_name', id=piece.id, url=piece.url) }}">More info</a></p>
+</div>
 {% endfor %}
+{% endblock %}
