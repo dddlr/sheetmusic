@@ -2,7 +2,10 @@
 {% block content %}
 {% if music %}
 Results:
-  {% if music.count() > 0 %}{% include "music.html" %}
+  {% if music.count() > 0 %}
+    {% for sheet in music %}
+      {% include "sheet_short.html" %}
+    {% endfor %}
   {% else %}No results :(
   {% endif %}
 {% endif %}

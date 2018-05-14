@@ -11,7 +11,7 @@ def index():
 def sheet_template(sheet):
     '''The actual template rendering for sheet music.'''
     page_title = "Viewing {}".format(sheet.name)
-    # Super hacky but it works (TODO)
+    # Retrieves instruments with super hacky way
     instruments = list(map(lambda i: Instrument.query.get(i.instrument_id), sheet.instruments))
     return render_template('sheet.html', sheet=sheet, title=page_title, instruments=instruments)
 
@@ -38,4 +38,4 @@ def search():
     if request.args.get('q'):
         results = Music.query.filter(Music.name.contains(request.args.get('q')))
 
-    return render_template('search.html', music=results)
+    return render_template('search.html', music=results, title='Search')
