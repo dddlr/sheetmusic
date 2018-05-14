@@ -31,6 +31,7 @@ class Music(db.Model):
     name = db.Column(db.String(32), index=True)
     year = db.Column(db.Integer)
     url = db.Column(db.String(32), nullable=False)
+    sheet_url = db.Column(db.String(32))
 
     style_id = db.Column(db.String(32), db.ForeignKey('style.style'))
     original_author_id = db.Column(db.Integer, db.ForeignKey('original_author.id'))
