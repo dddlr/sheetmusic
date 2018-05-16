@@ -38,7 +38,6 @@ class Music(db.Model):
 
     # this is not actually a database field, but a high-level feature that
     # enables access to instruments from the Music table
-    # TODO: see if this actually works
     instruments = db.relationship('MusicInstrument', backref='instrument', lazy='dynamic')
 
     def __repr__(self):
