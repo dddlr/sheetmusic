@@ -25,9 +25,7 @@ def sheet_with_name(id, url):
 
 @app.route('/sheet/<int:id>/')
 def sheet_with_id(id):
-    '''
-    Route for sheet music when only ID is given. Redirects to full
-    URL.'''
+    '''Route for sheet music when only ID is given. Redirects to full URL.'''
     sheet = Music.query.get(id)
     return redirect(url_for('sheet_with_name', id=id, url=sheet.url))
 

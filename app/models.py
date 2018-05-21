@@ -1,6 +1,7 @@
 from app import db
 
 class Instrument(db.Model):
+    '''Stores different instruments and info about them.'''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True, unique=True)
     info = db.Column(db.String(200))
@@ -11,6 +12,7 @@ class Instrument(db.Model):
         return '<Instrument {}>'.format(self.name)
 
 class Style(db.Model):
+    '''Stores styles of music and their descriptions.'''
     style = db.Column(db.String(32), primary_key=True)
     description = db.Column(db.String(200))
 
@@ -18,6 +20,8 @@ class Style(db.Model):
         return '<Style {}>'.format(self.style)
 
 class OriginalAuthor(db.Model):
+    '''Stores the original composer of different pieces of music, e.g. if a
+    song was arranged by another person.'''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     country = db.Column(db.String(20))
@@ -27,6 +31,7 @@ class OriginalAuthor(db.Model):
         return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
 
 class Music(db.Model):
+    '''Stores a piece of music.'''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
     year = db.Column(db.Integer)
@@ -44,6 +49,7 @@ class Music(db.Model):
         return '<Music {} ({})>'.format(self.name, self.id)
 
 class MusicInstrument(db.Model):
+    '''Links a piece of music to an instrument that piece of music uses.'''
     id = db.Column(db.Integer, primary_key=True)
     music_id = db.Column(db.Integer, db.ForeignKey('music.id'))
     instrument_id = db.Column(db.Integer, db.ForeignKey('instrument.id'))
