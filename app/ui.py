@@ -1,8 +1,9 @@
-from app import app
-from flask import render_template, redirect, request, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from app.models import Music, Instrument
 
-@app.route('/')
+bp = Blueprint('ui', __name__)
+
+@bp.route('/')
 def index():
     '''Browse all sheet music.'''
     music = Music.query.all()
@@ -15,7 +16,7 @@ def sheet_template(sheet):
     instruments = list(map(lambda i: Instrument.query.get(i.instrument_id), sheet.instruments))
     return render_template('sheet.html', sheet=sheet, title=page_title, instruments=instruments)
 
-@app.route('/sheet/<int:id>/<string:url>/')
+@bp.route('/sheet/<int:id>/<string:url>/')
 def sheet_with_name(id, url):
     '''Route for sheet music when both ID and URL slug is given.'''
     sheet = Music.query.get(id)
@@ -23,13 +24,13 @@ def sheet_with_name(id, url):
         return sheet_template(sheet)
     return redirect(url_for('sheet_with_name', id=id, url=sheet.url))
 
-@app.route('/sheet/<int:id>/')
+@bp.route('/sheet/<int:id>/')
 def sheet_with_id(id):
     '''Route for sheet music when only ID is given. Redirects to full URL.'''
     sheet = Music.query.get(id)
     return redirect(url_for('sheet_with_name', id=id, url=sheet.url))
 
-@app.route('/search/')
+@bp.route('/search/')
 def search():
     '''Search music by name.'''
     results = []

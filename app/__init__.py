@@ -4,19 +4,24 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 import os
 
-app = Flask(__name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
-login = LoginManager(app)
+from config import Config
 
-# Configuration
-app.config['SECRET_KEY'] = b'h~ 4J\x18@F\xc4\xd2\x19\xa2\x1e\x11\xe6\\\x0cs\xf9"~\x1bV\xac'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-app.config['ADMIN_PASSWORD'] = 'blepblop'
-
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 # For migrating changes of database models to actual database
-migrate = Migrate(app, db)
+migrate = Migrate()
 
-from app import core, models
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+    print('sql database is at', app.config.get('SQLALCHEMY_DATABASE_URI'))
+
+    db.init_app(app)
+    migrate.init_app(app, db)
+    login = LoginManager(app)
+
+    from app.ui import bp as ui_bp
+    app.register_blueprint(ui_bp)
+
+    return app
+
+from app import models
