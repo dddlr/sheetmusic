@@ -3,3 +3,4 @@ Flask-Migrate
 Flask-SQLAlchemy
 alembic
 flask-login
+pytest
