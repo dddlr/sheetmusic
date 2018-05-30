@@ -21,6 +21,8 @@ def create_app(config_class=Config):
 
     from app.ui import bp as ui_bp
     app.register_blueprint(ui_bp)
+    from app.admin import bp as admin_bp
+    app.register_blueprint(admin_bp)
 
     return app
 
