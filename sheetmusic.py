@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import Instrument, Style, OriginalAuthor, Music, MusicInstrument
+from app.models import Instrument, Style, OriginalAuthor, Music
 
 app = create_app()
 
@@ -11,5 +11,4 @@ def make_shell_context():
         'Style': Style,
         'OriginalAuthor': OriginalAuthor,
         'Music': Music,
-        'MusicInstrument': MusicInstrument,
     }

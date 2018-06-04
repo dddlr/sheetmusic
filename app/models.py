@@ -30,6 +30,11 @@ class OriginalAuthor(db.Model):
     def __repr__(self):
         return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
 
+musicinstrument = db.Table('musicinstrument',
+    db.Column('music_id', db.Integer, db.ForeignKey('music.id'), primary_key=True),
+    db.Column('instrument_id', db.Integer, db.ForeignKey('instrument.id'), primary_key=True)
+)
+
 class Music(db.Model):
     '''Stores a piece of music.'''
     id = db.Column(db.Integer, primary_key=True)
@@ -43,16 +48,8 @@ class Music(db.Model):
 
     # this is not actually a database field, but a high-level feature that
     # enables access to instruments from the Music table
-    instruments = db.relationship('MusicInstrument', backref='instrument', lazy='dynamic')
+    instruments = db.relationship('Instrument', secondary=musicinstrument,
+        lazy='subquery', backref=db.backref('music', lazy=True))
 
     def __repr__(self):
         return '<Music {} ({})>'.format(self.name, self.id)
-
-class MusicInstrument(db.Model):
-    '''Links a piece of music to an instrument that piece of music uses.'''
-    id = db.Column(db.Integer, primary_key=True)
-    music_id = db.Column(db.Integer, db.ForeignKey('music.id'))
-    instrument_id = db.Column(db.Integer, db.ForeignKey('instrument.id'))
-
-    def __repr__(self):
-        return '<MusicInstrument {} ({})>'.format(self.music_id, self.instrument_id)
