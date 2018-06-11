@@ -1,0 +1,22 @@
+{% extends "admin.html" %}
+{% block form %}
+<form action="" method="post">
+  <p>
+    <label for="name">Instrument name:</label>
+    <input id="name" name="name" type="text" placeholder="Type name here">
+  </p>
+  <p>
+    <label for="info">Info:</label>
+    <input id="info" name="info" type="text" placeholder="Type info here">
+  </p>
+  <p>
+    <label for="range">Range:</label>
+    <input id="range" name="range" type="text" placeholder="Type range here">
+  </p>
+  <p>
+    <label for="image">Image URL:</label>
+    <input id="image" name="image" type="text" placeholder="Type image URL here">
+  </p>
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}
