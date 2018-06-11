@@ -3,7 +3,7 @@ from app import db
 class Instrument(db.Model):
     '''Stores different instruments and info about them.'''
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), index=True, unique=True)
+    name = db.Column(db.String(32), index=True, nullable=False, unique=True)
     info = db.Column(db.String(200))
     range = db.Column(db.String(100))
     image = db.Column(db.String(100))
