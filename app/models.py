@@ -13,7 +13,7 @@ class Instrument(db.Model):
 
 class Style(db.Model):
     '''Stores styles of music and their descriptions.'''
-    style = db.Column(db.String(32), primary_key=True)
+    style = db.Column(db.String(32), primary_key=True, nullable=False)
     description = db.Column(db.String(200))
 
     def __repr__(self):
