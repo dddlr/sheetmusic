@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if status %}
-<div{% if error %} class="error"{% endif %}>{{ status }}</div>
+<div{% if error %} class="error"{% endif %}>
+  {% if error %}Sorry, there was a problem fulfilling your request:<br>
+  {% endif %}{{ status }}</div>
 {% endif %}
 {% block form %}{% endblock %}
 {% endblock %}
