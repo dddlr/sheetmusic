@@ -21,6 +21,7 @@ def add_style():
             db.session.add(style)
             db.session.commit()
         except exc.IntegrityError as err:
+            # Raised by database itself
             error = True
             print('/admin/style/:', err)
             status = "Something went wrong. Please try again."
@@ -44,25 +45,25 @@ def add_instrument():
     status = None
     if request.method == 'POST':
         try:
-            print('qqqq')
             name = request.form['name']
             info = request.form['info']
             range = request.form['range']
             image = request.form['image']
             check_instrument(name, info, range, image)
-            print('eeee')
             instrument = Instrument(name=name, info=info, range=range, image=image)
-            print('aaaa')
             db.session.add(instrument)
             db.session.commit()
         except exc.IntegrityError as err:
+            # Errors raised by the database itself
             error = True
             print('/admin/instrument/:', err)
             status = "Something went wrong. Please try again."
         except ValueError as err:
+            # Problems raised by the check_instrument function
             error = True
             status = err
         except Exception as err:
+            # Any weird errors, time to debug
             error = True
             print("Unexpected error:", err)
             status = "Something went wrong. Please try again."
@@ -75,4 +76,15 @@ def add_instrument():
 
 @bp.route('/admin/music/', methods=['GET', 'POST'])
 def add_music():
-    return render_template('admin_music.html', title="Admin", error=error)
+    error = False
+    status = None
+    instruments = Instrument.query.all()
+    styles = Style.query.all()
+    if request.method == 'POST':
+        name = request.form['name']
+        year = request.form['name']
+        url = request.form['name']
+        sheet_url = request.form['name']
+        style = request.form['style']
+        # TODO: instruments?
+    return render_template('admin_music.html', title="Admin", error=error, instruments=instruments, styles=styles)

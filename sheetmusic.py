@@ -5,6 +5,7 @@ app = create_app()
 
 @app.shell_context_processor
 def make_shell_context():
+    """Prepares variables when running `flask shell`."""
     return {
         'db': db,
         'Instrument': Instrument,
