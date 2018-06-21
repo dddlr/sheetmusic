@@ -1,6 +1,7 @@
 Flask
 Flask-Migrate
 Flask-SQLAlchemy
+Flask-WTF==0.14.2
 alembic
 flask-login
 pytest
