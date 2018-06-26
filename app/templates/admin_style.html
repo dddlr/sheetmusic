@@ -1,14 +1,21 @@
 {% extends "admin.html" %}
 {% block form %}
 <form action="" method="post">
+  {{ form.hidden_tag() }}
   <p>
-    <label for="style">Style name:</label>
-    <input id="style" name="style" type="text" placeholder="Type name here">
+    {{ form.style.label }}<br>
+    {{ form.style(size=32) }}
+    {% for error in form.style.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="description">Style description:</label>
-    <input id="description" name="description" type="text" placeholder="Type description here">
-  </p>
-  <button type="submit">Submit</button>
+    {{ form.description.label }}<br>
+    {{ form.description(size=200) }}
+    {% for error in form.description.errors %}
+    {{ error }}
+    {% endfor %}
+  <p>
+  <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}

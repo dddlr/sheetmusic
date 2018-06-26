@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, flash, render_template, request
 from sqlalchemy import exc
 from app import db
+from app.forms import AddStyleForm
 from app.models import Instrument, Style
 from app.validate import check_instrument, check_style, RowExistsError
 
@@ -11,31 +12,26 @@ def add_style():
     """Renders the page for adding a style/genre, as well as handling the
     addition of a style into the database."""
     error = False
-    status = None
-    if request.method == 'POST':
+    form = AddStyleForm()
+    if form.validate_on_submit():
         try:
             name = request.form['style']
             description = request.form['description']
-            check_style(name, description)
             style = Style(style=name, description=description)
             db.session.add(style)
             db.session.commit()
+            print('added successfull')
+            flash("Style added successfully.")
         except exc.IntegrityError as err:
             # Raised by database itself
             error = True
             print('/admin/style/:', err)
-            status = "Something went wrong. Please try again."
-        except ValueError as err:
-            # Covers ValueError and RowExistsError
-            error = True
-            status = err
+            flash("Something went wrong with adding the style. Please try again.")
         except Exception as err:
             error = True
             print("Unexpected error:", err)
-            status = "Something went wrong. Please try again."
-        else:
-            status = "Added successfully."
-    return render_template('admin_style.html', title="Admin", status=status, error=error)
+            flash("Something went wrong with adding the style. Please try again.")
+    return render_template('admin_style.html', title="Admin", error=error, form=form)
 
 @bp.route('/admin/instrument/', methods=['GET', 'POST'])
 def add_instrument():

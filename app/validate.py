@@ -7,19 +7,6 @@ class RowExistsError(ValueError):
     def __init__(self, message):
         self.message = message
 
-def check_style(style, description=None):
-    """Checks if style is valid according to the database models."""
-    if Style.query.get(style):
-        raise RowExistsError("This style already exists.")
-    elif len(style) > 32 or len(description) > 200:
-        raise ValueError("Style or description can be a maximum of 32 or 200 \
-            characters only.")
-    elif style == 'bbb':
-        raise ValueError("This is a value error.")
-    elif not style:
-        raise ValueError("Name of style cannot be empty.")
-    return True
-
 def check_instrument(name, info=None, range=None, image=None):
     """Checks if style is valid according to the database models."""
     too_long = []

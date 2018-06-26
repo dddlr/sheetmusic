@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if status %}
-<div{% if error %} class="error"{% endif %}>
-  {% if error %}Sorry, there was a problem fulfilling your request:<br>
-  {% endif %}{{ status }}</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+  <p>{{ message }}</p>
+  {% endfor %}
 {% endif %}
+{% endwith %}
 {% block form %}{% endblock %}
 {% endblock %}
