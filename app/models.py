@@ -25,7 +25,10 @@ class OriginalAuthor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     country = db.Column(db.String(20))
+    # UNIX timestamp
     dob = db.Column(db.Integer)
+    # TODO
+    # dob = db.Column(db.String(10))
 
     def __repr__(self):
         return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
@@ -39,6 +42,7 @@ class Music(db.Model):
     '''Stores a piece of music.'''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
+    # TODO: add limit
     year = db.Column(db.Integer)
     url = db.Column(db.String(32), nullable=False)
     sheet_url = db.Column(db.String(32))

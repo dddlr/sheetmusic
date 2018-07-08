@@ -1,40 +1,54 @@
 {% extends "admin.html" %}
 {% block form %}
 <form action="" method="post">
+  {{ form.hidden_tag() }}
   <p>
-    <label for="name">Name:</label>
-    <input id="name" name="name" type="text" placeholder="Type name here">
+    {{ form.name.label }}
+    {{ form.name(size=32) }}
+    {% for error in form.name.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="year">Year:</label>
-    <input id="year" name="year" type="number" pattern="[0-9]*" placeholder="Type a year here">
+    {{ form.year.label }}
+    {{ form.year }}
+    {% for error in form.year.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="url">URL of info page:</label>
-    <input id="url" name="url" type="text" placeholder="Type info page URL here">
+    {{ form.url.label }}
+    {{ form.url(size=32) }}
+    {% for error in form.url.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="sheet_url">Sheet URL:</label>
-    <input id="sheet_url" name="sheet_url" type="text" placeholder="Type sheet URL here">
+    {{ form.sheet_url.label }}
+    {{ form.sheet_url(size=32) }}
+    {% for error in form.sheet_url.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="style">Style:</label>
+    {{ form.style.label }}
     <select id="style" name="style" type="text">
       <option value="" selected>
       {% for style in styles %}
       <option value="{{ style.style }}">{{ style.style }}</option>
       {% endfor %}
     </select>
+    {% for error in form.style.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
   <p>
-    <label for="instrument">Instrument:</label>
-    <select id="instrument" name="instrument" type="text">
-      <option value="" selected>
-      {% for instrument in instruments %}
-      <option value="{{ instrument.id }}">{{ instrument.name }}</option>
-      {% endfor %}
-    </select>
+    {{ form.instruments.label }}
+    {{ form.instruments }}
+    {% for error in form.instruments.errors %}
+    {{ error }}
+    {% endfor %}
   </p>
-  <button type="submit">Submit</button>
+  <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}

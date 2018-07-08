@@ -9,24 +9,19 @@
     {{ error }}
     {% endfor %}
   </p>
+
   <p>
-    {{ form.info.label }}
-    {{ form.info(size=200) }}
-    {% for error in form.info.errors %}
+    {{ form.country.label }}
+    {{ form.country(size=20) }}
+    {% for error in form.country.errors %}
     {{ error }}
     {% endfor %}
   </p>
+
   <p>
-    {{ form.range.label }}
-    {{ form.range(size=100) }}
-    {% for error in form.range.errors %}
-    {{ error }}
-    {% endfor %}
-  </p>
-  <p>
-    {{ form.image.label }}
-    {{ form.image(size=100) }}
-    {% for error in form.image.errors %}
+    {{ form.dob.label }}
+    {{ form.dob }}
+    {% for error in form.dob.errors %}
     {{ error }}
     {% endfor %}
   </p>
