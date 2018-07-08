@@ -1,0 +1,26 @@
+# How to run
+
+From within sheetmusic directory:
+
+```bash
+. ./env/bin/activate
+. ./init.sh
+```
+
+# Routes
+
+Here is a basic site map until the navigation is complete:
+
+- `app/admin.py`:
+  + `/admin/instrument/` - Add new instrument.
+  + `/admin/style/` - Add new style.
+  + `/admin/author/` - (TODO) Add new "original author".
+  + `/admin/music/` - Add a new piece of music.
+- `app/ui.py`:
+  + `/` - Home
+  + `/sheet/<id>/`, `/sheet/<id>/<slug>/` - View specific sheet of music
+  + `/search/` - Search by name
+
+# TODO
+
+- Flask-WTF
