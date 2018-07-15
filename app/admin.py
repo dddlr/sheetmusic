@@ -103,15 +103,16 @@ def add_music():
     if form.validate_on_submit():
         try:
             # TODO: OriginalAuthor
-            print(form.style.data)
-            print(form.instruments.data)
+            # Turn list of instrument IDs into list of instrument objects to
+            # make flask happy
+            instruments = [Instrument.query.get(i) for i in form.instruments.data]
             music = Music(
                 name=form.name.data,
                 year=form.year.data,
                 url=form.url.data,
                 sheet_url=form.sheet_url.data,
                 style_id=form.style.data,
-                instruments=form.instruments.data,
+                instruments=instruments,
             )
             db.session.add(music)
             db.session.commit()
