@@ -13,7 +13,7 @@ def sheet_template(sheet):
     '''The actual template rendering for sheet music.'''
     page_title = "Viewing {}".format(sheet.name)
     # Retrieves instruments with super hacky way
-    instruments = list(map(lambda i: Instrument.query.get(i.instrument_id), sheet.instruments))
+    instruments = list(map(lambda i: Instrument.query.get(i.id), sheet.instruments))
     return render_template('sheet.html', sheet=sheet, title=page_title, instruments=instruments)
 
 @bp.route('/sheet/<int:id>/<string:url>/')

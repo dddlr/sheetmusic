@@ -4,44 +4,47 @@
   {{ form.hidden_tag() }}
   <p>
     {{ form.name.label }}
-    {{ form.name(size=32) }}
+    {{ form.name(maxlength=32) }}
     {% for error in form.name.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.year.label }}
-    {{ form.year }}
+    {{ form.year(maxlength=4) }}
     {% for error in form.year.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.url.label }}
-    {{ form.url(size=32) }}
+    {{ form.url(maxlength=32) }}
     {% for error in form.url.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.sheet_url.label }}
-    {{ form.sheet_url(size=32) }}
+    {{ form.sheet_url(maxlength=32) }}
     {% for error in form.sheet_url.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.style.label }}
-    <select id="style" name="style" type="text">
-      <option value="" selected>
-      {% for style in styles %}
-      <option value="{{ style.style }}">{{ style.style }}</option>
-      {% endfor %}
-    </select>
+    {{ form.style }}
     {% for error in form.style.errors %}
     {{ error }}
     {% endfor %}
   </p>
+  <p>
+    {{ form.original_author.label }}
+    {{ form.original_author }}
+    {% for error in form.original_author.errors %}
+    {{ error }}
+    {% endfor %}
+  </p>
+
   <p>
     {{ form.instruments.label }}
     {{ form.instruments }}

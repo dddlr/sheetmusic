@@ -1,3 +1,4 @@
+import datetime
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, SelectMultipleField, StringField, SubmitField
 from wtforms.fields.html5 import DateField
@@ -38,18 +39,13 @@ class AddOriginalAuthorForm(FlaskForm):
     dob = DateField('Date of birth', format='%Y-%m-%d', validators=[Optional()])
     submit = SubmitField('Submit')
 
-    def validate_dob(self, dob):
-        # TODO: Check if dob is valid
-        pass
-
 class AddMusicForm(FlaskForm):
     """Form used to add a new piece of music."""
     name = StringField('Music name', validators=[DataRequired(), Length(max=32)])
-    year = IntegerField('Year')
+    year = IntegerField('Year', validators=[Length(max=4)])
     url = StringField('URL-friendly name', validators=[DataRequired(), Length(max=32)])
     sheet_url = StringField('URL of sheet music', validators=[Length(max=32)])
     style = SelectField('Style', coerce=str)
-    # TODO
-    # original_author = SelectField('Original author', coerce=str)
+    original_author = SelectField('Original author', coerce=int)
     instruments = SelectMultipleField('Instruments', coerce=int)
     submit = SubmitField('Submit')

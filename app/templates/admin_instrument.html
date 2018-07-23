@@ -4,28 +4,28 @@
   {{ form.hidden_tag() }}
   <p>
     {{ form.name.label }}
-    {{ form.name(size=32) }}
+    {{ form.name(maxlength=32) }}
     {% for error in form.name.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.info.label }}
-    {{ form.info(size=200) }}
+    {{ form.info(maxlength=200) }}
     {% for error in form.info.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.range.label }}
-    {{ form.range(size=100) }}
+    {{ form.range(maxlength=100) }}
     {% for error in form.range.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.image.label }}
-    {{ form.image(size=100) }}
+    {{ form.image(maxlength=100) }}
     {% for error in form.image.errors %}
     {{ error }}
     {% endfor %}

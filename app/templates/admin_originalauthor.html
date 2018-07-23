@@ -4,7 +4,7 @@
   {{ form.hidden_tag() }}
   <p>
     {{ form.name.label }}
-    {{ form.name(size=32) }}
+    {{ form.name(maxlength=32) }}
     {% for error in form.name.errors %}
     {{ error }}
     {% endfor %}
@@ -12,7 +12,7 @@
 
   <p>
     {{ form.country.label }}
-    {{ form.country(size=20) }}
+    {{ form.country(maxlength=20) }}
     {% for error in form.country.errors %}
     {{ error }}
     {% endfor %}

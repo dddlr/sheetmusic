@@ -4,14 +4,14 @@
   {{ form.hidden_tag() }}
   <p>
     {{ form.style.label }}<br>
-    {{ form.style(size=32) }}
+    {{ form.style(maxlength=32) }}
     {% for error in form.style.errors %}
     {{ error }}
     {% endfor %}
   </p>
   <p>
     {{ form.description.label }}<br>
-    {{ form.description(size=200) }}
+    {{ form.description(maxlength=200) }}
     {% for error in form.description.errors %}
     {{ error }}
     {% endfor %}

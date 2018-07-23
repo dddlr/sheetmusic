@@ -1,4 +1,4 @@
-{% set url = url_for('sheet_with_name', id=sheet.id, url=sheet.url) %}
+{% set url = url_for('ui.sheet_with_name', id=sheet.id, url=sheet.url) %}
 <div>
   <h3><a href="{{ url }}">{{ sheet.name }}</a></h3>
   <p>{{ sheet.year }}</p>

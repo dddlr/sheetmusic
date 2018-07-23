@@ -25,10 +25,7 @@ class OriginalAuthor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     country = db.Column(db.String(20))
-    # UNIX timestamp
-    dob = db.Column(db.Integer)
-    # TODO
-    # dob = db.Column(db.String(10))
+    dob = db.Column(db.String(10))
 
     def __repr__(self):
         return '<OriginalAuthor {} ({})>'.format(self.name, self.id)
@@ -42,13 +39,15 @@ class Music(db.Model):
     '''Stores a piece of music.'''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
-    # TODO: add limit
     year = db.Column(db.Integer)
     url = db.Column(db.String(32), nullable=False)
     sheet_url = db.Column(db.String(32))
 
     style_id = db.Column(db.String(32), db.ForeignKey('style.style'))
+    # Lets us see style as a style object, and not just the ID of the style
+    style = db.relationship('Style')
     original_author_id = db.Column(db.Integer, db.ForeignKey('original_author.id'))
+    original_author = db.relationship('OriginalAuthor')
 
     # this is not actually a database field, but a high-level feature that
     # enables access to instruments from the Music table

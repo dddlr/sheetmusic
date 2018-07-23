@@ -1,5 +1,3 @@
-import time
-import datetime
 from flask import Blueprint, flash, render_template, request
 from sqlalchemy import exc
 from app import db
@@ -73,7 +71,6 @@ def add_originalauthor():
 
     if form.validate_on_submit():
         try:
-            # TODO: change dob to accept text
             author = OriginalAuthor(name=form.name.data, country=form.country.data, dob=form.dob.data)
             db.session.add(author)
             db.session.commit()
@@ -88,7 +85,6 @@ def add_originalauthor():
             flash("Something went wrong with adding the author. Please try again.")
     return render_template('admin_originalauthor.html', title="Admin", error=error, form=form)
 
-
 @bp.route('/admin/music/', methods=['GET', 'POST'])
 def add_music():
     """Renders the page for adding music, as well as handling the addition of a
@@ -98,11 +94,14 @@ def add_music():
     form = AddMusicForm()
     styles = Style.query.all()
     authors = OriginalAuthor.query.all()
-    form.style.choices = [(i.style, i.style) for i in Style.query.all()]
+    # [('', '')] is default - None
+    form.style.choices = [('', '')] + [(i.style, i.style) for i in Style.query.all()]
+    # TODO: see if there's a way to have ('', '') as an option
+    # despite coerce=int
+    form.original_author.choices = [(i.id, i.name) for i in OriginalAuthor.query.all()]
     form.instruments.choices = [(i.id, i.name) for i in Instrument.query.order_by('name')]
     if form.validate_on_submit():
         try:
-            # TODO: OriginalAuthor
             # Turn list of instrument IDs into list of instrument objects to
             # make flask happy
             instruments = [Instrument.query.get(i) for i in form.instruments.data]
@@ -112,10 +111,12 @@ def add_music():
                 url=form.url.data,
                 sheet_url=form.sheet_url.data,
                 style_id=form.style.data,
+                original_author_id=form.original_author.data,
                 instruments=instruments,
             )
             db.session.add(music)
             db.session.commit()
+            flash("Music added successfully.")
         except exc.IntegrityError as err:
             error = True
             print('/admin/music/:', err)
