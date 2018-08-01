@@ -2,5 +2,7 @@
 <div class="block">
   <h3 class="sheet-name"><a href="{{ url }}">{{ sheet.name }}</a></h3>
   <p class="sheet-date">{{ sheet.year }}</p>
-  <p>Download sheet music</p>
+  {% if sheet.sheet_url %}
+  <p><a href="{{ sheet.sheet_url | get_sheet_url }}">Download sheet music</a></p>
+  {% endif %}
 </div>

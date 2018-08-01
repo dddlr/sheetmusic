@@ -4,8 +4,9 @@
   <h3 class="sheet-name">{{ sheet.name }}</h3>
   <p class="sheet-date">Year: {{ sheet.year }}</p>
   <p>Style: {{ sheet.style_id }}</p>
-  <!-- TODO -->
-  <p><a>Download sheet music</a></p>
+  {% if sheet.sheet_url %}
+  <p><a href="{{ sheet.sheet_url | get_sheet_url }}">Download sheet music</a></p>
+  {% endif %}
   <h4>Instruments:</h4>
   {% for i in instruments %}
     Name: {{ i.name }}<br>
@@ -13,5 +14,8 @@
     Range: {{ i.range }}<br>
     Image: {{ i.image }}<br>
   {% endfor %}
+  {% if sheet.original_author %}
+  <p>Original author: {{ sheet.original_author.name }}</p>
+  {% endif %}
 </div>
 {% endblock %}
