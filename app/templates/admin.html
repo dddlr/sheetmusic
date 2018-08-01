@@ -2,10 +2,14 @@
 {% block content %}
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-  {% for message in messages %}
-  <p>{{ message }}</p>
-  {% endfor %}
+  <div class="description">
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+  </div>
 {% endif %}
 {% endwith %}
+<div class="block">
 {% block form %}{% endblock %}
+</div>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-<div>
-  <h3>{{ sheet.name }}</h3>
-  <p>Year: {{ sheet.year }}</p>
+<div class="block">
+  <h3 class="sheet-name">{{ sheet.name }}</h3>
+  <p class="sheet-date">Year: {{ sheet.year }}</p>
   <p>Style: {{ sheet.style_id }}</p>
   <!-- TODO -->
   <p><a>Download sheet music</a></p>
@@ -11,7 +11,7 @@
     Name: {{ i.name }}<br>
     Info: {{ i.info }}<br>
     Range: {{ i.range }}<br>
-    Image: {{ i.image }}
+    Image: {{ i.image }}<br>
   {% endfor %}
 </div>
 {% endblock %}

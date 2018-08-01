@@ -1,0 +1,80 @@
+/* Big structures */
+
+body {
+  margin: 0;
+  font-family: Verdana, sans-serif;
+  background-attachment: fixed;
+  background-color: #000;
+  /* Image from https://www.pexels.com/photo/printed-musical-note-page-164821/ under public domain */
+  background-image: url('bg.jpg');
+  background-size: cover;
+}
+
+header,
+main,
+footer {
+  max-width: 50rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.footer-wrapper {
+  margin-top: 1rem;
+  background-color: #222;
+  font-size: .9rem;
+  color: #ddd;
+}
+
+/* Universal elements */
+
+a { color: #000;  }
+
+.sheet-name,
+.sheet-date {
+  margin-right: .5rem;
+  display: inline-block;
+}
+
+.sheet-name {
+  margin-top: .5rem;
+}
+
+/* Individual parts */
+
+header h1,
+h2 a {
+  color: #fff;
+}
+
+.title-wrapper {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.description,
+.block {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.description {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+.block {
+  background-color: rgba(255,255,255,.9);
+}

@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if music %}
-Results:
   {% if music.count() > 0 %}
     {% for sheet in music %}
       {% include "sheet_short.html" %}
     {% endfor %}
-  {% else %}No results :(
+    {% else %}<div class="description">No results :(</div>
   {% endif %}
 {% endif %}
 {% endblock %}

@@ -2,15 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Sheety music{% if title %} - {{ title }}{% endif %}</title>
   </head>
   <body>
     <header>
-    <h2><a href="/">Sheety music</a></h2>
-    {% if title %}<h1>{{ title }}</h1>{% endif %}
-    {% include "search_bar.html" %}
+      <h2><a href="/">Sheety music</a></h2>
+      <div class="title-wrapper">
+        {% if title %}<h1 class="title">{{ title }}</h1>{% endif %}
+        {% include "search_bar.html" %}
+      </div>
     </header>
-    <hr>
-    {% block content %}{% endblock %}
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <div class="footer-wrapper">
+      <footer>&copy; 2018 Grant Wong.</footer>
+    </div>
   </body>
 </html>
